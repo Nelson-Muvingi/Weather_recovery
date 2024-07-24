@@ -43,19 +43,8 @@ export default function Main() {
             <input type="submit" />
         </form>
         <div className="display">
-            {weather &&  <h2 className="city">{weather.location.city}, {weather.location.country}</h2>}
+          {weather && <h2>{weather.location.city}</h2>}
         </div>
-        {/* {loading ? (<Load/>):(
-            <div className="display">
-            {weather &&  <h2 className="city">{weather.location.city}, {weather.location.country}</h2>}
-            <div className="infos">
-                {weather &&  <p className="condition">{weather.current_observation.condition.text}</p>}
-                {weather &&  <p className="temperature">🌡 Temperature : {weather.current_observation.condition.temperature}°C</p>}
-                {weather &&  <p className="sunrise">☀️ Sunrise : {weather.current_observation.astronomy.sunrise} </p>}
-                {weather &&  <p className="humidity">💧 Humidity : {weather.current_observation.atmosphere.humidity}</p>}
-            </div>
-        </div>
-        )} */}   
              
     </div>
   )
