@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react"
-// import Load from "./Load"
+import Load from "./Load"
 import { useState } from "react"
 
 export default function Main() {
@@ -12,9 +12,9 @@ export default function Main() {
   }
   const [weather,setWeather]=useState()
   const [city,setCity]=useState()
-  // const [loading, setLoading]= (false)
+  const [loading, setLoading]= useState(false)
     useEffect(()=>{
-        // setLoading(true)
+        setLoading(true)
         const fetchWeather = async () =>{
             const options = {
                 method: 'GET',
@@ -32,19 +32,27 @@ export default function Main() {
             const response = await axios.request(options)
             console.log(response.data);
             setWeather(response.data)
-            // setLoading(false)
+            setLoading(false)
         }
         fetchWeather();
-    },[city])
+    },[city,setLoading])
   return (
     <div>
         <form onSubmit={ handleSubmit }>
             <input type="text"  />
             <input type="submit" />
         </form>
-        <div className="display">
-          {weather && <h2>{weather.location.city}</h2>}
-        </div>
+        {loading ? (<Load/>):(
+          <div className="display">
+          {weather &&  <h2 className="city">{weather.location.city}, {weather.location.country}</h2>}
+          <div className="infos">
+              {weather &&  <p className="condition">{weather.current_observation.condition.text}</p>}
+              {weather &&  <p className="temperature">🌡 Temperature : {weather.current_observation.condition.temperature}°C</p>}
+              {weather &&  <p className="sunrise">☀️ Sunrise : {weather.current_observation.astronomy.sunrise} </p>}
+              {weather &&  <p className="humidity">💧 Humidity : {weather.current_observation.atmosphere.humidity}</p>}
+          </div>
+      </div>
+      )}
              
     </div>
   )
