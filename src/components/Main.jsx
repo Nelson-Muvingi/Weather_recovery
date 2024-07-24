@@ -1,8 +1,11 @@
 import axios from "axios"
 import { useEffect } from "react"
+import Load from "./Load"
 
 export default function Main() {
+  const [loading, setLoading]= (false)
     useEffect(()=>{
+        setLoading(true)
         const fetchWeather = async () =>{
             const options = {
               method: 'GET',
@@ -19,12 +22,17 @@ export default function Main() {
             }
             const res = await axios.request(options)
             console.log(res);
+            setLoading(false)
         }
         fetchWeather();
-    },[])
+    },[setLoading])
   return (
     <div>
-        
+        {loading ? (<Load/>):(
+          <div>
+            
+          </div>
+        )}
     </div>
   )
 }
