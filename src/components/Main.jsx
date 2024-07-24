@@ -8,6 +8,7 @@ export default function Main() {
     e.preventDefault()
     console.log(e);
     setCity(e.target[0].value)
+    e.target.reset();
 
   }
   const [weather,setWeather]=useState()
